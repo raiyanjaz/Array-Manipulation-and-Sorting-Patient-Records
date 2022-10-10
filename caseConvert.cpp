@@ -8,6 +8,5 @@ int main () {
     
     cout << "Please input a character:";
     cin >> characterInput;
-    cout << "Changes";
-    cout << "change";
+    cout << "
 }
