@@ -4,9 +4,12 @@
 using namespace std;
 
 int main () {
-    char characterInput;
+    char arr[100];
     
-    cout << "Please input a character:";
+    cout << "Please input a character: ";
     cin >> characterInput;
-    cout << "
+    
+    int number = characterInput - 32;
+    char uppercase = number;
+    cout << "The characterInput changes to " << uppercase << endl;
 }
