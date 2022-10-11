@@ -25,19 +25,20 @@ int main () {
         cout << "\\" << endl;
     }
 
-    for (int i = 1; i >= (diamondSize-1); i++) // For loop to create line = diamondSize (middle line of diamond)
-        cout << " ";
-    cout << "/";
+    if (diamondSize > 1)
+        cout << "/";
 
     for (int i = 2; i <= (2*diamondSize-1); i++)
         cout << " ";
-    cout << "\\" << endl;
+    cout << "\\";
+
+    if (diamondSize > 1)
+        cout << "" << endl;
 
     // Bottom half of diamond
-    
-    for (int i = 1; i >= (diamondSize-1); i++) // For loop to create line diamondSize + 1 (first line of the bottom half of diamond)
-        cout << " ";
-    cout << "\\";
+
+    if (diamondSize > 1)
+        cout << "\\";
 
     for (int i = 2; i <= (2*diamondSize-1); i++)
         cout << " ";
@@ -53,5 +54,4 @@ int main () {
             cout << " ";
         cout << "/" << endl;
     }
-
 }
