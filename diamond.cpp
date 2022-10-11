@@ -14,28 +14,44 @@ int main () {
         cout << " ";  
     cout << "/\\" << endl;
 
-    for (int x = 2; x <= (diamondSize-1); x++) {  // For loop to create the middle lines in the diamond shape
-        
+    for (int x = 2; x <= (diamondSize-1); x++) {  // Nested for loop to create the shape from line 2 to line diamondSize-1
+  
         for (int i = 1; i <= (diamondSize-x); i++) 
             cout << " ";
         cout << "/"; 
 
-        for (int i = 2; i <= (diamondSize-x); i++)
+        for (int i = diamondSize-x+2; i <= (diamondSize+x-1); i++)
             cout << " ";
         cout << "\\" << endl;
     }
 
-    for (int i = 1; i >= (diamondSize-1); i++) // For loop to create the middle line or the last line in the top half
+    for (int i = 1; i >= (diamondSize-1); i++) // For loop to create line = diamondSize (middle line of diamond)
         cout << " ";
-    cout << "/" << endl;
+    cout << "/";
+
+    for (int i = 2; i <= (2*diamondSize-1); i++)
+        cout << " ";
+    cout << "\\" << endl;
 
     // Bottom half of diamond
     
-    for (int i = 1; i >= (diamondSize-1); i++)
+    for (int i = 1; i >= (diamondSize-1); i++) // For loop to create line diamondSize + 1 (first line of the bottom half of diamond)
         cout << " ";
-    cout << "\\" << endl;
-    
-    for (int x = 4; x <= (diamondSize-1) && x>0; x--)
+    cout << "\\";
+
+    for (int i = 2; i <= (2*diamondSize-1); i++)
         cout << " ";
-    cout << "\\" << endl;
+    cout << "/" << endl;
+
+    for ( int x = (diamondSize-1); x >= 1; x--) { // Nested for loop to create lines diamondSize + 2 to second last line of diamond shape
+
+        for (int i = 1; i <= (diamondSize-x); i++)
+            cout << " ";
+        cout << "\\";
+
+        for (int i = diamondSize-x+2; i <= (diamondSize+x-1); i++)
+            cout << " ";
+        cout << "/" << endl;
+    }
+
 }
