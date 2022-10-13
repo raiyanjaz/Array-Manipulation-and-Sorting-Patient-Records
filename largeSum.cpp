@@ -35,4 +35,6 @@ int main (const int argc, const char* const argv[]) { // Main function with comm
             one[i] = 0;
     }
 
+    cout << x << " here";
+
 }
