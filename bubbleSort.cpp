@@ -4,7 +4,7 @@
 
 using namespace std; 
 
-int main()
+int main() 
 {
     // Provided arrays and constants
     const int NUM_PATIENTS = 10; // 10 patients will be included, this value cannot be modified
