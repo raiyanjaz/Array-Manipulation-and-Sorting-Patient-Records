@@ -7,34 +7,54 @@ int computation ();
 
 int main (const int argc, const char* const argv[]) { // Main function with command line arguments
 
-    char carry = 0;
+    int carry = 0;
     int x = strlen(argv[1]) + 1;
     const int length1 = strlen(argv[1]);
     const int length2 = strlen(argv[2]);
 
     bool greater = false;
 
-    char one[length1];
-    char two[length2];
+    char number1[length1];
+    char number2[length2];
 
     if (strlen(argv[2]) > strlen(argv[1])) {
         x = strlen(argv[2]) + 1;
         greater = true;
     }
 
-    char sum[x];
+    char finalNumber[x];
 
-    for (int i = strlen(argv[1]) - 1; i >= 0; i--)
-        one[i] = argv[1][i];
-
-    for (int i = strlen(argv[2]) - 1; i >= 0; i--)
-        two[i] = argv[2][i];
-    
-    for (int i = strlen(argv[1]) - 1; i >= 0; i--) {
-        if (one[i] = '0')
-            one[i] = 0;
+    for (int i = length1 - 1; i >= 0; i--) { // Stores the values from argv1 into char array number1
+        number1[i] = argv[1][i];
     }
 
-    cout << x << " here";
+    for (int i = length2 - 1; i >= 0; i--) // Stores the values from argv2 into char array number2
+        number2[i] = argv[2][i];
+
+    reverse(number1.begin[length1], number1.end[length1]);
+
+    
+    
+    for (int i = 0; i < length1; i++) {
+        int sum = (number1[i] - '0') + (number2[i] - '0') + carry
+
+    }
+    
+    /*
+    for (int i = strlen(argv[1]) - 1; i >= 0; i--) { 
+        if (number1[i] = '0')
+            number1[i] = 0;
+    }
+    */
+
+   /*
+    for (int i = x-2; i >= 0; i--) {
+        if (number1[i] + number2[i] > 10)
+            char carry = 1;
+        finalNumber[i] = number1[i] + number2[i] + carry;
+    } */
+
+    for (int i = 0; i <= strlen(argv[1]) - 1; i++)
+        cout << number1[i];
 
 }
