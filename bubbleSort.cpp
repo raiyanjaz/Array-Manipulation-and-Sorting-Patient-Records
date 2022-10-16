@@ -4,9 +4,9 @@
 
 using namespace std; 
 
-int main() 
-{
+int main() {
     // Provided arrays and constants
+
     const int NUM_PATIENTS = 10; // 10 patients will be included, this value cannot be modified
     const int MAX_NAME_LENGTH = 10; // no names longer than 10 characters, this value cannot be modified
     const int ID_LENGTH = 8;
@@ -18,50 +18,60 @@ int main()
 
     // PART 1: Select a primary sorting category from user input
 
-    const int N = 5;
-    char userInput[N];
-    int varAfterInput;
-    
     cout << "Please enter the sorting category (Age, ID, First, Last, Sex): ";
     
-    char input = cin.get();
     int i = 0;
+    char userInput[i];
+    char input = cin.get();
     
-    while (input != '\n' && i < N-1) {
+    while (input != '\n') {
         userInput[i] = input;
         i++;
         input = cin.get();
-    }
+    }   
+    i--;
 
-    userInput[i] = 0;
-    varAfterInput = 1;
-    
-    const int inputLength = strlen(userInput);
     int userInputValue;
 
-    cout << inputLength << endl;
-
-    for (int i = 0; i <= inputLength - 1; i++) {
-        if (userInput[i] >= 97 && userInput[i] <= 122)
-            userInputValue = userInput[i];
-            int temp = userInputValue - 32;
-            userInput[i] = temp;
+    if (userInput[0] >= 97 && userInput[0] <= 122) {
+        userInputValue = userInput[0];
+        userInputValue -= 32;
+        userInput[0] = userInputValue;
+    }
+    
+    for (int k = 1; k <= i; k++) {
+        if (userInput[k] >= 65 && userInput[k] <= 90) {
+            userInputValue = userInput[k];
+            userInputValue += 32;
+            userInput[k] = userInputValue;
+        }
     }
 
-    for ()
-    
+    int caseNumber;
 
+    switch (i) {
+        case 1: 
+            caseNumber = 2;
+            break;
+        case 2:
+            if (userInput[0] = 65)
+                caseNumber = 1;
+            break;
+            if (userInput[0] = 83)
+                caseNumber = 3;
+            break;
+        case 3:
+            caseNumber = 4;
+            break;
+        case 4:
+            caseNumber = 5;
+            break;
+    }
 
-    cout << "You inputed: " << userInput << endl;
-    
-    /*
-    if (strcmp(userInput, idCode) == 0)
-        cout << "hello";
-    */
-
-
-
-
+    cout << "Case " << caseNumber << ", sorting by ";
+    for (int k = 0; k <= i; k++)
+        cout << userInput[k];
+    cout << ".";
 
     // PART 3/4: Sorting patient records
 
