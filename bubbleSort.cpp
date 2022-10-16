@@ -40,6 +40,10 @@ int main() {
     }
     
     for (int k = 1; k <= i; k++) {
+        // if (userInput[0] = 73) // If statement that ensures any input of ID is shown as ID
+            // userInputValue = userInput[k];
+            
+        
         if (userInput[k] >= 65 && userInput[k] <= 90) {
             userInputValue = userInput[k];
             userInputValue += 32;
@@ -48,10 +52,12 @@ int main() {
     }
 
     int caseNumber;
+    char casePrint[];
 
     switch (i) {
         case 1: 
             caseNumber = 2;
+            casePrint[] = {"ID"};
             break;
         case 2:
             if (userInput[0] = 65)
@@ -70,7 +76,7 @@ int main() {
 
     cout << "Case " << caseNumber << ", sorting by ";
     for (int k = 0; k <= i; k++)
-        cout << userInput[k];
+        cout << casePrint[k];
     cout << ".";
 
     // PART 3/4: Sorting patient records
