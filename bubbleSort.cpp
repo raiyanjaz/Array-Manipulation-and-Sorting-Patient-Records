@@ -18,48 +18,70 @@ int main() {
 
     // PART 1: Select a primary sorting category from user input
 
-    char category[5][6] = {"Age", "ID", "First", "Last", "Sex"};
-    
     cout << "Please enter the sorting category (Age, ID, First, Last, Sex): ";
+    int count = 0;
+    char userInput[count]; 
 
-    int i = 0;
-    char userInput[i]; 
-    char input = cin.get(); // Stores the first character that user inputs
-    
-    while (input != '\n') { // While statement that stores the first character into the first element of char array userInput and does the same for sequential characters
-        userInput[i] = input;
-        i++;
-        input = cin.get();
-    }   
-    i--;
+    char category[5][6] = {"Age", "ID", "First", "Last", "Sex"};
 
-    
+    bool validInputCheck = true;
 
-    int userInputValue;
+    while (validInputCheck == true) {
+        
+        char input = cin.get(); // Stores the first character that user inputs
+        
+        while (input != '\n') { // While statement that stores the first character into the first element of char array userInput and does the same for sequential characters
+            userInput[count] = input;
+            count++;
+            input = cin.get();
+        }
+        userInput[count] = 0;
+        count--;
 
-    if (userInput[0] >= 97 && userInput[0] <= 122) { // If statement that changes the first element in userInput into a capital letter
-        userInputValue = userInput[0];
-        userInputValue -= 32;
-        userInput[0] = userInputValue;
-    }
+        int userInputValue;
 
-    for (int k = 1; k <= i; k++) { // For loop that changes every element in userInput after the first element into a lowercase value
-        if (userInput[k] >= 65 && userInput[k] <= 90) {
-            userInputValue = userInput[k];
-            userInputValue += 32;
-            userInput[k] = userInputValue;
+        if (userInput[0] >= 97 && userInput[0] <= 122) { // If statement that changes the first element in userInput into a capital letter
+            userInputValue = userInput[0];
+            userInputValue -= 32;
+            userInput[0] = userInputValue;
+        }
+
+        for (int i = 1; i <= count; i++) { // For loop that changes every element in userInput after the first element into a lowercase value
+            if (userInput[i] >= 65 && userInput[i] <= 90) {
+                userInputValue = userInput[i];
+                userInputValue += 32;
+                userInput[i] = userInputValue;
+            }
+        }
+
+        if (userInput[0] == 73) { // If statement that ensures any input of ID is shown as ID
+                userInputValue = userInput[1];
+                userInputValue -= 32;
+                userInput[1] = userInputValue;
+        }
+
+        int compare;
+        int i = 0;
+        while (i < 5) {
+            compare = strcmp(userInput, category[i]);
+            if (compare > 0 || compare < 0) {
+                i++;
+            } else if (compare == 0) {
+                validInputCheck = false;
+                break;
+            }
+        }
+
+        if (i > 4) {
+            cin.clear();
+            cin.ignore(100, '\n');
+            cout << "Unexpected input. Please input either Age, ID, First, Last, or Sex: ";
         }
     }
-
-    if (userInput[0] == 73) { // If statement that ensures any input of ID is shown as ID
-            userInputValue = userInput[1];
-            userInputValue -= 32;
-            userInput[1] = userInputValue;
-    }
-
+    
     int caseNumber;
     
-    switch (i) {
+    switch (count) {
         case 1: // If user inputs ID
             caseNumber = 2;
             break;
@@ -79,10 +101,10 @@ int main() {
     }
 
     cout << "Case " << caseNumber << ", sorting by ";
-    for (int k = 0; k <= i; k++)
-        cout << userInput[k];
-        if (caseNumber == 4 || caseNumber == 5)
-            cout << " Name";
+    for (int i = 0; i <= count; i++)
+        cout << userInput[i];
+    if (caseNumber == 4 || caseNumber == 5)
+        cout << " Name";
     cout << ".";
 
     // PART 3/4: Sorting patient records
