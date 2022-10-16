@@ -106,7 +106,7 @@ int main() {
         cout << userInput[i];
     if (caseNumber == 4 || caseNumber == 5)
         cout << " Name";
-    cout << ".";
+    cout << "." << endl;
 
     // PART 3/4: Sorting patient records
 
@@ -116,8 +116,30 @@ int main() {
 
     // PART 2: Outputting patient records to terminal in tabular form
 
+    cout << setw(12) << "Age: "; // Prints out the Age row and all its values with a fixed width of 12 using a for loop
+    for (int i = 0; i < 10; i++)
+        cout << setw(10) << age[i];
+    cout << "" << endl;
 
+    cout << setw(12) << "ID: "; // Prints out the ID row and all its values with a fixed width of 12 using a for loop
+    for (int i = 0; i < 10; i++)
+        cout << setw(10) << id[i];
+    cout << "" << endl;
 
+    cout << setw(10) << "First Name: "; // Prints out the First Name row and all its values with a fixed width of 10 using a for loop
+    for (int i = 0; i < 10; i++)
+        cout << setw(10) << firstName[i];
+    cout << "" << endl;
+
+    cout << setw(12) << "Last Name: "; // Prints out the Last Name row and all its values with a fixed width of 12 using a for loop
+    for (int i = 0; i < 10; i++)
+        cout << setw(10) << lastName[i];
+    cout << "" << endl;
+
+    cout << setw(12) << "Sex: "; // Prints out the Sex row and all its values with a fixed width of 12 using a for loop
+    for (int i = 0; i < 10; i++)
+        cout << setw(10) << sex[i];
+    cout << "" << endl;
 
     return 0;
 }
