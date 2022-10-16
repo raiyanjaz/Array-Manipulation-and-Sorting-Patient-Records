@@ -17,7 +17,7 @@ int main() {
     char sex[NUM_PATIENTS] = {'f','m','m','m','f','f','m','f','m','f'}; // 1D char array sex of the patient
 
     // PART 1: Select a primary sorting category from user input
-
+    
     cout << "Please enter the sorting category (Age, ID, First, Last, Sex): ";
     int count = 0;
     char userInput[count]; 
@@ -66,16 +66,15 @@ int main() {
             compare = strcmp(userInput, category[i]);
             if (compare > 0 || compare < 0) {
                 i++;
+                if (i == 5) {
+                    cout << "Unexpected input. Please input either Age, ID, First, Last, or Sex: ";
+                    cin.clear();
+                    cin.ignore(); 
+                }
             } else if (compare == 0) {
                 validInputCheck = false;
                 break;
             }
-        }
-
-        if (i > 4) {
-            cin.clear();
-            cin.ignore(100, '\n');
-            cout << "Unexpected input. Please input either Age, ID, First, Last, or Sex: ";
         }
     }
     
@@ -86,12 +85,14 @@ int main() {
             caseNumber = 2;
             break;
         case 2: // If user inputs Age or Sex
-            if (userInput[0] = 65)
+            if (userInput[0] == 65) {
                 caseNumber = 1;
-            break;
-            if (userInput[0] = 83)
+                break; 
+            }
+            if (userInput[0] == 83) {
                 caseNumber = 3;
-            break;
+                break;
+            }
         case 3: // If user inputs Last
             caseNumber = 4;
             break;
