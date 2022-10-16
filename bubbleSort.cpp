@@ -112,8 +112,6 @@ int main() {
 
 
 
-
-
     // PART 2: Outputting patient records to terminal in tabular form
 
     cout << setw(12) << "Age: "; // Prints out the Age row and all its values with a fixed width of 12 using a for loop
