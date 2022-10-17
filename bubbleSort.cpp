@@ -16,9 +16,10 @@ int main() {
     char lastName[NUM_PATIENTS][MAX_NAME_LENGTH] = {"pratt", "xiao", "barkley", "wu", "sappal", "mcdonald", "garza", "tran", "nahas", "baker"}; // 2D char array: last names for patients
     char sex[NUM_PATIENTS] = {'f','m','m','m','f','f','m','f','m','f'}; // 1D char array sex of the patient
 
-    // PART 1: Select a primary sorting category from user input
-    
+    // PART 1: Select a primary sorting category from user input 
+
     cout << "Please enter the sorting category (Age, ID, First, Last, Sex): ";
+
     int count = 0;
     char userInput[count]; 
 
@@ -30,13 +31,14 @@ int main() {
 
         char input = cin.get(); // Stores the first character that user inputs
         
+        count = 0; 
+    
         while (input != '\n') { // While statement that stores the first character into the first element of char array userInput and does the same for sequential characters
             userInput[count] = input;
             count++;
             input = cin.get();
         }
         userInput[count] = 0;
-        count--;
 
         int userInputValue;
 
@@ -75,15 +77,14 @@ int main() {
         if (check == 5) {
             cout << "Unexpected input. Please input either Age, ID, First, Last, or Sex: ";
             cin.clear(); 
-            for (int i = 0; i <= strlen(userInput) - 1; i++)
-            userInput[i] = '0';
-        }
-            
+        }  
     }
+
+    int counter = strlen(userInput) - 1;
     
     int caseNumber;
     
-    switch (count) {
+    switch (counter) {
         case 1: // If user inputs ID
             caseNumber = 2;
             break;
@@ -177,3 +178,4 @@ int main() {
 
     return 0;
 }
+
