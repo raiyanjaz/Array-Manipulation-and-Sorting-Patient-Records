@@ -113,10 +113,21 @@ int main() {
 
     // PART 3/4: Sorting patient records
 
+    bool tiebreaker;
+
     if (caseNumber == 1) { // Sorting for Age 
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
-            for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {    
-                if (age[i2] > age[i2+1] || age[i2] == age[i2+1]) { 
+            for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {   
+                for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Tiebreaker is turned on when the first character of first name is greater than the next one
+                    if (firstName[i][i3] > firstName[i+1][i3]) {
+                        tiebreaker = true;
+                        break;
+                    } else if (firstName[i][i3] < firstName[i+1][i3]) { // Tiebreaker is turned off when the first character of first name is less than the next one
+                        tiebreaker = false;
+                        break;
+                    }
+                } 
+                if (age[i2] > age[i2+1] || (age[i2] == age[i2+1] && tiebreaker)) { 
                     int temp = age[i2]; // Orders Age in ascending order
                     age[i2] = age[i2+1];
                     age[i2+1] = temp;
@@ -153,7 +164,7 @@ int main() {
     if (caseNumber == 2) { // Sorting for ID
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
           for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
-                if ((id[i2][0] - '0') > (id[i2+1][0] - '0')) { 
+                if ((id[i2][0] - '0') > (id[i2+1][0] - '0') || ((id[i2][0] - '0') == (id[i2+1][0] - '0') && tiebreaker)) { 
                     for (int i3 = 0; i3 < ID_LENGTH + 1; i3++) { // Orders ID in increasing order
                         char temp2[NUM_PATIENTS][ID_LENGTH+1];
                         temp2[i2][i3] = id[i2][i3];
@@ -190,7 +201,7 @@ int main() {
     if (caseNumber == 3) { // Sorting for Sex
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
           for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
-                if ((sex[i2] - '0') > (sex[i2+1] - '0')) { 
+                if ((sex[i2] - '0') > (sex[i2+1] - '0') || ((sex[i2] - '0') == (sex[i2+1] - '0') && tiebreaker)) { 
                     char temp2[NUM_PATIENTS];  // Orders Sex in alphabetical order
                     temp2[i2] = sex[i2];
                     sex[i2] = sex[i2+1];
@@ -227,7 +238,7 @@ int main() {
     if (caseNumber == 4) { // Sorting for Last Name
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
           for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
-                if ((lastName[i2][0] - '0') > (lastName[i2+1][0] - '0')) { 
+                if ((lastName[i2][0] - '0') > (lastName[i2+1][0] - '0') || ((lastName[i2][0] - '0') == (lastName[i2+1][0] - '0') && tiebreaker)) { 
                     for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders Last Name in alphabetical order
                         char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
                         temp2[i2][i3] = lastName[i2][i3];
