@@ -112,34 +112,80 @@ int main() {
 
     // PART 3/4: Sorting patient records
 
-    int indexLocation[NUM_PATIENTS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-
     if (caseNumber == 1) { // Sorting for Age
-        for (int i = 0; i < NUM_PATIENTS; i++) { 
-            for (int i2 = 0; i2 < NUM_PATIENTS - i; i2++) {
-                if (age[i2] > age[i2+1]) {
+        for (int i = 0; i < NUM_PATIENTS-1; i++) {
+          for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
+                if (age[i2] > age[i2+1] || age[i2] == age[i2+1]) {
                     int temp = age[i2];
                     age[i2] = age[i2+1];
                     age[i2+1] = temp;
-                }
-            }
-        }
-    } 
-    if (caseNumber == 2) {
-        for (int i = 0; i < NUM_PATIENTS; i++) {
-            for (int i2 = 0; i2 < ID_LENGTH - i; i2++) {
-                for (int i3 = ID_LENGTH - i2; i3 >= 0; i3++) {
-                    if ((id[i2][i0] + '0') > (id[i2+1][i2] + '0') && (id[i2][i2+1] + '0') > (id[i2+1][i2+2] + '0')) {
-                        swap(id[i2], id[i2+1]);
-                }
-                }
+                
+                    for (int i3 = 0; i3 < ID_LENGTH + 1; i3++) { // Orders ID according to Age
+                        char temp2[NUM_PATIENTS][ID_LENGTH+1];
+                        temp2[i2][i3] = id[i2][i3];
+                        id[i2][i3] = id[i2+1][i3];
+                        id[i2+1][i3] = temp2[i2][i3];
+                    }  
+                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders First Name according to Age
+                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
+                        temp2[i2][i3] = firstName[i2][i3];
+                        firstName[i2][i3] = firstName[i2+1][i3];
+                        firstName[i2+1][i3] = temp2[i2][i3];
+                    }
+                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders Last Name according to Age
+                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
+                        temp2[i2][i3] = lastName[i2][i3];
+                        lastName[i2][i3] = lastName[i2+1][i3];
+                        lastName[i2+1][i3] = temp2[i2][i3];
+                    }       
+                                
+                    char temp2[NUM_PATIENTS];  // Orders sex according to Age
+                    temp2[i2] = sex[i2];
+                    sex[i2] = sex[i2+1];
+                    sex[i2+1] = temp2[i2];
+                }    
             }
         }
     }
 
+    if (caseNumber == 1) { // Sorting for Age
+        for (int i = 0; i < NUM_PATIENTS-1; i++) {
+          for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
+                if (age[i2] > age[i2+1] || age[i2] == age[i2+1]) {
+                    int temp = age[i2];
+                    age[i2] = age[i2+1];
+                    age[i2+1] = temp;
+                
+                    for (int i3 = 0; i3 < ID_LENGTH + 1; i3++) { // Orders ID according to Age
+                        char temp2[NUM_PATIENTS][ID_LENGTH+1];
+                        temp2[i2][i3] = id[i2][i3];
+                        id[i2][i3] = id[i2+1][i3];
+                        id[i2+1][i3] = temp2[i2][i3];
+                    }  
+                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders First Name according to Age
+                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
+                        temp2[i2][i3] = firstName[i2][i3];
+                        firstName[i2][i3] = firstName[i2+1][i3];
+                        firstName[i2+1][i3] = temp2[i2][i3];
+                    }
+                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders Last Name according to Age
+                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
+                        temp2[i2][i3] = lastName[i2][i3];
+                        lastName[i2][i3] = lastName[i2+1][i3];
+                        lastName[i2+1][i3] = temp2[i2][i3];
+                    }       
+                                
+                    char temp2[NUM_PATIENTS];  // Orders sex according to Age
+                    temp2[i2] = sex[i2];
+                    sex[i2] = sex[i2+1];
+                    sex[i2+1] = temp2[i2];
+                }    
+            }
+        }
+    }
+    
+     
   
-
-
     // PART 2: Outputting patient records to terminal in tabular form
 
     cout << setw(12) << "Age: "; // Prints out the Age row and all its values with a fixed width of 12 using a for loop

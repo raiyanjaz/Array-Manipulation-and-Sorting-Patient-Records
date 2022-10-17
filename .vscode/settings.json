@@ -2,7 +2,10 @@
     "files.associations": {
         "iostream": "cpp",
         "*.tcc": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "array": "cpp",
+        "sstream": "cpp",
+        "tuple": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
