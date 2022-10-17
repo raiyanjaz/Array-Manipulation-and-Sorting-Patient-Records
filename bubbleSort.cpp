@@ -26,7 +26,7 @@ int main() {
 
     bool validInputCheck = true;
 
-    while (validInputCheck == true) {
+    while (validInputCheck) {
         
         char input = cin.get(); // Stores the first character that user inputs
         
@@ -61,12 +61,12 @@ int main() {
         }
 
         int compare;
-        int i = 0;
-        while (i < 5) {
-            compare = strcmp(userInput, category[i]);
+        int check = 0;
+        while (check < 5) {
+            compare = strcmp(userInput, category[check]);
             if (compare > 0 || compare < 0) {
-                i++;
-                if (i == 5) {
+                check++;
+                if (check == 5) {
                     cout << "Unexpected input. Please input either Age, ID, First, Last, or Sex: ";
                     cin.clear();
                     cin.ignore(); 
@@ -110,6 +110,36 @@ int main() {
 
     // PART 3/4: Sorting patient records
 
+    char ageOrdered[NUM_PATIENTS];
+    int indexLocation[NUM_PATIENTS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    /*
+    if (caseNumber == 1) { // Sorting for Age
+
+        int max, pos;
+
+        for (int i = NUM_PATIENTS - 1; i >= 0; i--) { 
+
+            max = 0;
+
+            
+            
+            
+            
+            
+            
+            
+            for (int i2 = 0; i2 < NUM_PATIENTS; i2++) {
+                if (age[i2] > max) {
+                    max = age[i2];
+                    pos = i2;
+                }
+            }
+            ageOrdered[i] = max;
+            age[pos] = 0;
+        }
+    }
+    */
 
 
     // PART 2: Outputting patient records to terminal in tabular form
