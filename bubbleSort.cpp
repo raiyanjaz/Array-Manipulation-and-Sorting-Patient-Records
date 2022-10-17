@@ -16,7 +16,7 @@ int main() {
     char lastName[NUM_PATIENTS][MAX_NAME_LENGTH] = {"pratt", "xiao", "barkley", "wu", "sappal", "mcdonald", "garza", "tran", "nahas", "baker"}; // 2D char array: last names for patients
     char sex[NUM_PATIENTS] = {'f','m','m','m','f','f','m','f','m','f'}; // 1D char array sex of the patient
 
-    // PART 1: Select a primary sorting category from user input 
+   // PART 1: Select a primary sorting category from user input 
 
     cout << "Please enter the sorting category (Age, ID, First, Last, Sex): ";
 
@@ -68,8 +68,7 @@ int main() {
             compare = strcmp(userInput, category[check]);
             if (compare > 0 || compare < 0) {
                 check++; 
-            }
-            else if (compare == 0) {
+            } else if (compare == 0) {
                 validInputCheck = false;
                 break;
             }
@@ -92,8 +91,7 @@ int main() {
             if (userInput[0] == 65) {
                 caseNumber = 1;
                 break; 
-            }
-            if (userInput[0] == 83) {
+            } else if (userInput[0] == 83) {
                 caseNumber = 3;
                 break;
             }
@@ -114,39 +112,32 @@ int main() {
 
     // PART 3/4: Sorting patient records
 
-    char ageOrdered[NUM_PATIENTS];
     int indexLocation[NUM_PATIENTS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    char tempArr[NUM_PATIENTS][ID_LENGTH + 1][MAX_NAME_LENGTH];
-
-    
     if (caseNumber == 1) { // Sorting for Age
-
-        int max, pos;
-
-        for (int i = NUM_PATIENTS - 1; i >= 0; i--) { 
-
-            max = 0;
-
-            for (int i2 = 0; i2 < NUM_PATIENTS; i2++) {
-                if (age[i2] > max) {
-                    max = age[i2];
-                    pos = i2;
+        for (int i = 0; i < NUM_PATIENTS; i++) { 
+            for (int i2 = 0; i2 < NUM_PATIENTS - i; i2++) {
+                if (age[i2] > age[i2+1]) {
+                    int temp = age[i2];
+                    age[i2] = age[i2+1];
+                    age[i2+1] = temp;
                 }
             }
-            ageOrdered[i] = max;
-            age[pos] = 0;
         }
-
-        for (int i = 0; i < NUM_PATIENTS; i++) 
-            tempArr[i][NUM_PATIENTS][NUM_PATIENTS] = ageOrdered[i];
-
-        for (int i = 0; i < NUM_PATIENTS; i++)
-            tempArr[NUM_PATIENTS][i][NUM_PATIENTS] = ageOrdered[i];
-
     } 
-    
-    cout << tempArr << endl;
+    if (caseNumber == 2) {
+        for (int i = 0; i < NUM_PATIENTS; i++) {
+            for (int i2 = 0; i2 < ID_LENGTH - i; i2++) {
+                for (int i3 = ID_LENGTH - i2; i3 >= 0; i3++) {
+                    if ((id[i2][i0] + '0') > (id[i2+1][i2] + '0') && (id[i2][i2+1] + '0') > (id[i2+1][i2+2] + '0')) {
+                        swap(id[i2], id[i2+1]);
+                }
+                }
+            }
+        }
+    }
+
+  
 
 
     // PART 2: Outputting patient records to terminal in tabular form
