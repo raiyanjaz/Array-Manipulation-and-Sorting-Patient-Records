@@ -27,7 +27,7 @@ int main() {
     bool validInputCheck = true;
 
     while (validInputCheck) {
-        
+
         char input = cin.get(); // Stores the first character that user inputs
         
         while (input != '\n') { // While statement that stores the first character into the first element of char array userInput and does the same for sequential characters
@@ -65,17 +65,20 @@ int main() {
         while (check < 5) {
             compare = strcmp(userInput, category[check]);
             if (compare > 0 || compare < 0) {
-                check++;
-                if (check == 5) {
-                    cout << "Unexpected input. Please input either Age, ID, First, Last, or Sex: ";
-                    cin.clear();
-                    cin.ignore(); 
-                }
-            } else if (compare == 0) {
+                check++; 
+            }
+            else if (compare == 0) {
                 validInputCheck = false;
                 break;
             }
         }
+        if (check == 5) {
+            cout << "Unexpected input. Please input either Age, ID, First, Last, or Sex: ";
+            cin.clear(); 
+            for (int i = 0; i <= strlen(userInput) - 1; i++)
+            userInput[i] = '0';
+        }
+            
     }
     
     int caseNumber;
@@ -113,7 +116,9 @@ int main() {
     char ageOrdered[NUM_PATIENTS];
     int indexLocation[NUM_PATIENTS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    /*
+    char tempArr[NUM_PATIENTS][ID_LENGTH + 1][MAX_NAME_LENGTH];
+
+    
     if (caseNumber == 1) { // Sorting for Age
 
         int max, pos;
@@ -122,13 +127,6 @@ int main() {
 
             max = 0;
 
-            
-            
-            
-            
-            
-            
-            
             for (int i2 = 0; i2 < NUM_PATIENTS; i2++) {
                 if (age[i2] > max) {
                     max = age[i2];
@@ -138,8 +136,16 @@ int main() {
             ageOrdered[i] = max;
             age[pos] = 0;
         }
-    }
-    */
+
+        for (int i = 0; i < NUM_PATIENTS; i++) 
+            tempArr[i][NUM_PATIENTS][NUM_PATIENTS] = ageOrdered[i];
+
+        for (int i = 0; i < NUM_PATIENTS; i++)
+            tempArr[NUM_PATIENTS][i][NUM_PATIENTS] = ageOrdered[i];
+
+    } 
+    
+    cout << tempArr << endl;
 
 
     // PART 2: Outputting patient records to terminal in tabular form
