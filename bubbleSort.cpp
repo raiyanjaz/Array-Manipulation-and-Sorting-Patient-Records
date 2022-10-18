@@ -284,7 +284,7 @@ int main() {
 
     if (caseNumber == 5) { // Sorting for First Name
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
-          for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
+            for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {   
                 if (strcmp(firstName[i2] , firstName[i2+1]) > 0) { 
                     for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders First Name in alphabetical order
                         char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
