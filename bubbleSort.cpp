@@ -38,7 +38,7 @@ int main() {
             count++;
             input = cin.get();
         }
-        userInput[count] = 0;
+        userInput[count] = 0; // The last value is converted into a null value
 
         int userInputValue;
         for (int i = 0; i <= count; i++) { // For loop that changes every element in userInput into a lowercase value using ASCII Table
