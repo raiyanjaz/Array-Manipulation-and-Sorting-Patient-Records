@@ -1,4 +1,4 @@
-# Assignment 2 : Array Manipulation and Sorting Patient Records
+# Array Manipulation and Sorting Patient Records
 
 ## caseConversion.cpp instructions:
     Write a program that takes a character from terminal as input, and provide one of the following three outputs depending on the input character:
