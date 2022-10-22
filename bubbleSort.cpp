@@ -24,14 +24,13 @@ int main() {
     int count = 0;
     char userInput[count]; 
 
-    char category[5][6] = {"Age", "ID", "First", "Last", "Sex"}; // Used this 
+    char category[5][6] = {"age", "id", "sex", "last", "first"}; // Used this 
 
     bool validInputCheck = true;
 
     while (validInputCheck) {
 
         char input = cin.get(); // Stores the first character that user inputs
-        
         count = 0; 
     
         while (input != '\n') { // While statement that stores the first character into the first element of char array userInput and does the same for sequential characters
@@ -43,24 +42,10 @@ int main() {
 
         int userInputValue;
 
-        if (userInput[0] >= 97 && userInput[0] <= 122) { // If statement that changes the first element in userInput into a capital letter
+        if (userInput[0] >= 65 && userInput[0] <= 90) {
             userInputValue = userInput[0];
-            userInputValue -= 32;
+            userInputValue += 32;
             userInput[0] = userInputValue;
-        }
-
-        for (int i = 1; i <= count; i++) { // For loop that changes every element in userInput after the first element into a lowercase value
-            if (userInput[i] >= 65 && userInput[i] <= 90) {
-                userInputValue = userInput[i];
-                userInputValue += 32;
-                userInput[i] = userInputValue;
-            }
-        }
-
-        if (userInput[0] == 73) { // If statement that ensures any input of ID is shown as ID
-                userInputValue = userInput[1];
-                userInputValue -= 32;
-                userInput[1] = userInputValue;
         }
 
         int compare;
@@ -80,42 +65,13 @@ int main() {
         }  
     }
 
-    int counter = strlen(userInput) - 1;
-    
-    int caseNumber;
-    
-    switch (counter) {
-        case 1: // If user inputs ID
-            caseNumber = 2;
-            break;
-        case 2: // If user inputs Age or Sex
-            if (userInput[0] == 65) {
-                caseNumber = 1;
-                break; 
-            } else if (userInput[0] == 83) {
-                caseNumber = 3;
-                break;
-            }
-        case 3: // If user inputs Last
-            caseNumber = 4;
-            break;
-        case 4: // If user inputs First
-            caseNumber = 5;
-            break;
-    }
-
-    cout << "Case " << caseNumber << ", sorting by ";
-    for (int i = 0; i <= count; i++)
-        cout << userInput[i];
-    if (caseNumber == 4 || caseNumber == 5)
-        cout << " Name";
-    cout << "." << endl;
-
     // PART 3/4: Sorting patient records
 
     bool tiebreaker;
 
-    if (caseNumber == 1) { // Sorting for Age 
+    if (strcmp(userInput , category[0])) { // Checks if userInput is equal to age from the 2D category array
+        cout << "Case 1, sorting by Age";
+
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
             for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {   
                 for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Tiebreaker is turned on when the first character of first name is greater than the next one
@@ -161,9 +117,11 @@ int main() {
         }  
     }
 
-    if (caseNumber == 2) { // Sorting for ID
+    if (strcmp(userInput , category[1])) { // Sorting for ID
+        cout << "Case 2, sorting by ID";
+
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
-          for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
+            for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
                 if ((id[i2][0] - '0') > (id[i2+1][0] - '0') || ((id[i2][0] - '0') == (id[i2+1][0] - '0') && tiebreaker)) { 
                     for (int i3 = 0; i3 < ID_LENGTH + 1; i3++) { // Orders ID in increasing order
                         char temp2[NUM_PATIENTS][ID_LENGTH+1];
@@ -198,9 +156,11 @@ int main() {
         }
     }
     
-    if (caseNumber == 3) { // Sorting for Sex
+    if (strcmp(userInput , category[2])) { // Sorting for Sex
+        cout << "Case 3, sorting by Sex";
+
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
-          for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
+            for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
                 if ((sex[i2] - '0') > (sex[i2+1] - '0') || ((sex[i2] - '0') == (sex[i2+1] - '0') && tiebreaker)) { 
                     char temp2[NUM_PATIENTS];  // Orders Sex in alphabetical order
                     temp2[i2] = sex[i2];
@@ -235,9 +195,11 @@ int main() {
         }
     }
     
-    if (caseNumber == 4) { // Sorting for Last Name
+    if (strcmp(userInput , category[3])) { // Sorting for Last Name
+        cout << "Case 4, sorting by Last Name";
+
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
-          for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
+            for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
                 if ((lastName[i2][0] - '0') > (lastName[i2+1][0] - '0') || ((lastName[i2][0] - '0') == (lastName[i2+1][0] - '0') && tiebreaker)) { 
                     for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders Last Name in alphabetical order
                         char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
@@ -273,9 +235,11 @@ int main() {
         }
     }
 
-    if (caseNumber == 5) { // Sorting for Last Name
+    if (strcmp(userInput , category[4])) { // Sorting for First Name
+        cout << "Case 5, sorting by First Name";
+
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
-          for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
+            for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
                 if ((firstName[i2][0] - '0') > (firstName[i2+1][0] - '0')) { 
                     for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders First Name in alphabetical order
                         char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
@@ -340,4 +304,3 @@ int main() {
 
     return 0;
 }
-
