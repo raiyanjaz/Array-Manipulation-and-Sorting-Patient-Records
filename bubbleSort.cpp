@@ -15,6 +15,36 @@ char firstName[NUM_PATIENTS][MAX_NAME_LENGTH] = {"allison", "michael", "michael"
 char lastName[NUM_PATIENTS][MAX_NAME_LENGTH] = {"pratt", "xiao", "barkley", "wu", "sappal", "mcdonald", "garza", "tran", "nahas", "baker"}; // 2D char array: last names for patients
 char sex[NUM_PATIENTS] = {'f','m','m','m','f','f','m','f','m','f'}; // 1D char array sex of the patient
 
+char* sortFirstAndLast(char arr[][MAX_NAME_LENGTH], int length, int length2, int i) { // Function to sort 2D array
+    char temp[length][length2];
+    strcpy(temp[i] , arr[i]);
+    strcpy(arr[i] , arr[i+1]);
+    strcpy(arr[i+1] , temp[i]);
+    return arr[length];
+}
+
+char* sortID(char arr[][ID_LENGTH+1], int length, int length2, int i) { // Function to sort 2D array
+    char temp[length][length2];
+    strcpy(temp[i] , arr[i]);
+    strcpy(arr[i] , arr[i+1]);
+    strcpy(arr[i+1] , temp[i]);
+    return arr[length];
+} 
+
+int intArraySort(unsigned int arr[], int length, int i) { // Function to sort age (int array)
+    int temp = arr[i];
+    arr[i] = arr[i+1];
+    arr[i+1] = temp;
+    return arr[length];
+}
+
+char sortSex(char arr[], int length, int i) {
+    char temp[length];
+    temp[i] = arr[i];
+    arr[i] = arr[i+1];
+    arr[i+1] = temp[i];
+}
+
 int main() {
 
    // PART 1: Select a primary sorting category from user input 
@@ -24,7 +54,7 @@ int main() {
     int count = 0;
     char userInput[count]; 
 
-    char category[5][6] = {"age", "id", "sex", "last", "first"}; // Used this 
+    char category[5][6] = {"age", "id", "sex", "last", "first"}; // Used this 2D array to compare with userInput
 
     bool validInputCheck = true;
 
@@ -69,9 +99,8 @@ int main() {
 
     bool tiebreaker;
 
-    if (strcmp(userInput , category[0])) { // Checks if userInput is equal to age from the 2D category array
-        cout << "Case 1, sorting by Age";
-
+    if (strcmp(userInput , category[0]) == 0) { // Checks if userInput is equal to age from the 2D category array
+        cout << "Case 1, sorting by Age" << endl;
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
             for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {   
                 for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Tiebreaker is turned on when the first character of first name is greater than the next one
@@ -84,192 +113,80 @@ int main() {
                     }
                 } 
                 if (age[i2] > age[i2+1] || (age[i2] == age[i2+1] && tiebreaker)) { 
-                    int temp = age[i2]; // Orders Age in ascending order
-                    age[i2] = age[i2+1];
-                    age[i2+1] = temp;
-
-                    char temp2[NUM_PATIENTS];  // Orders Sex according to Age
-                    temp2[i2] = sex[i2];
-                    sex[i2] = sex[i2+1];
-                    sex[i2+1] = temp2[i2];
-                    
-                    for (int i3 = 0; i3 < ID_LENGTH + 1; i3++) { // Orders ID according to Age
-                        char temp2[NUM_PATIENTS][ID_LENGTH+1];
-                        temp2[i2][i3] = id[i2][i3];
-                        id[i2][i3] = id[i2+1][i3];
-                        id[i2+1][i3] = temp2[i2][i3];
-                    }  
-                
-                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders First Name according to Age
-                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
-                        temp2[i2][i3] = firstName[i2][i3];
-                        firstName[i2][i3] = firstName[i2+1][i3];
-                        firstName[i2+1][i3] = temp2[i2][i3];
-                    }
-                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders Last Name according to Age
-                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
-                        temp2[i2][i3] = lastName[i2][i3];
-                        lastName[i2][i3] = lastName[i2+1][i3];
-                        lastName[i2+1][i3] = temp2[i2][i3];
-                    }       
+                    intArraySort(age, NUM_PATIENTS, i2); // Sorts Age from lowest to greatest
+                    sortSex(sex, NUM_PATIENTS, i2);  // Orders Sex according to Age      
+                    sortID(id, NUM_PATIENTS, ID_LENGTH + 1, i2); // Orders ID according to Age
+                    sortFirstAndLast(firstName, NUM_PATIENTS, MAX_NAME_LENGTH, i2); // Orders First Name according to Age
+                    sortFirstAndLast(lastName , NUM_PATIENTS, MAX_NAME_LENGTH, i2); // Orders Last Name according to Age     
                 }  
             }
         }  
-    }
-
-    if (strcmp(userInput , category[1])) { // Sorting for ID
-        cout << "Case 2, sorting by ID";
-
+    } 
+    
+    else if (strcmp(userInput , category[1]) == 0) { // Sorting for ID
+        cout << "Case 2, sorting by ID" << endl;
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
             for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
                 if ((id[i2][0] - '0') > (id[i2+1][0] - '0') || ((id[i2][0] - '0') == (id[i2+1][0] - '0') && tiebreaker)) { 
-                    for (int i3 = 0; i3 < ID_LENGTH + 1; i3++) { // Orders ID in increasing order
-                        char temp2[NUM_PATIENTS][ID_LENGTH+1];
-                        temp2[i2][i3] = id[i2][i3];
-                        id[i2][i3] = id[i2+1][i3];
-                        id[i2+1][i3] = temp2[i2][i3];
-                    }       
-                    
-                    int temp = age[i2]; // Orders Age according to ID
-                    age[i2] = age[i2+1];
-                    age[i2+1] = temp;
-                
-                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders First Name according to ID
-                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
-                        temp2[i2][i3] = firstName[i2][i3];
-                        firstName[i2][i3] = firstName[i2+1][i3];
-                        firstName[i2+1][i3] = temp2[i2][i3];
-                    }
-                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders Last Name according to ID
-                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
-                        temp2[i2][i3] = lastName[i2][i3];
-                        lastName[i2][i3] = lastName[i2+1][i3];
-                        lastName[i2+1][i3] = temp2[i2][i3];
-                    }       
-                                
-                    char temp2[NUM_PATIENTS];  // Orders sex according to ID
-                    temp2[i2] = sex[i2];
-                    sex[i2] = sex[i2+1];
-                    sex[i2+1] = temp2[i2];
+                    sortID(id, NUM_PATIENTS, ID_LENGTH + 1, i2);// Orders ID in increasing order         
+                    intArraySort(age, NUM_PATIENTS, i2); // Orders Age according to ID
+                    sortFirstAndLast(firstName, NUM_PATIENTS, MAX_NAME_LENGTH, i2); // Orders First Name according to ID
+                    sortFirstAndLast(lastName , NUM_PATIENTS, MAX_NAME_LENGTH, i2); // Orders Last Name according to ID               
+                    sortSex(sex, NUM_PATIENTS, i2);  // Orders sex according to ID
                 }    
             }
         }
     }
     
-    if (strcmp(userInput , category[2])) { // Sorting for Sex
-        cout << "Case 3, sorting by Sex";
-
+    else if (strcmp(userInput , category[2]) == 0) { // Sorting for Sex
+        cout << "Case 3, sorting by Sex" << endl;
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
             for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
-                if ((sex[i2] - '0') > (sex[i2+1] - '0') || ((sex[i2] - '0') == (sex[i2+1] - '0') && tiebreaker)) { 
-                    char temp2[NUM_PATIENTS];  // Orders Sex in alphabetical order
-                    temp2[i2] = sex[i2];
-                    sex[i2] = sex[i2+1];
-                    sex[i2+1] = temp2[i2];
-                    
-                    int temp = age[i2]; // Orders Age according to Sex
-                    age[i2] = age[i2+1];
-                    age[i2+1] = temp;
-
-                    for (int i3 = 0; i3 < ID_LENGTH + 1; i3++) { // Orders ID according to Sex
-                        char temp2[NUM_PATIENTS][ID_LENGTH+1];
-                        temp2[i2][i3] = id[i2][i3];
-                        id[i2][i3] = id[i2+1][i3];
-                        id[i2+1][i3] = temp2[i2][i3];
-                    }  
-                
-                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders First Name according to Sex
-                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
-                        temp2[i2][i3] = firstName[i2][i3];
-                        firstName[i2][i3] = firstName[i2+1][i3];
-                        firstName[i2+1][i3] = temp2[i2][i3];
+                for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Tiebreaker is turned on when the first character of first name is greater than the next one
+                    if (firstName[i][i3] > firstName[i+1][i3]) {
+                        tiebreaker = true;
+                        break;
+                    } else if (firstName[i][i3] < firstName[i+1][i3]) { // Tiebreaker is turned off when the first character of first name is less than the next one
+                        tiebreaker = false;
+                        break;
                     }
-                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders Last Name according to Sex
-                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
-                        temp2[i2][i3] = lastName[i2][i3];
-                        lastName[i2][i3] = lastName[i2+1][i3];
-                        lastName[i2+1][i3] = temp2[i2][i3];
-                    }                
+                }
+                if ((sex[i2] - '0') > (sex[i2+1] - '0') || ((sex[i2] - '0') == (sex[i2+1] - '0') && tiebreaker)) { 
+                    sortSex(sex, NUM_PATIENTS, i2);  // Orders Sex in alphabetical order                   
+                    intArraySort(age, NUM_PATIENTS, i2); // Orders Age according to Sex
+                    sortID(id, NUM_PATIENTS, ID_LENGTH + 1, i2); // Orders ID according to Sex         
+                    sortFirstAndLast(firstName, NUM_PATIENTS, MAX_NAME_LENGTH, i2); // Orders First Name according to Sex
+                    sortFirstAndLast(lastName , NUM_PATIENTS, MAX_NAME_LENGTH, i2); // Orders Last Name according to Sex            
                 }    
             }
         }
     }
     
-    if (strcmp(userInput , category[3])) { // Sorting for Last Name
-        cout << "Case 4, sorting by Last Name";
-
+    else if (strcmp(userInput , category[3]) == 0) { // Sorting for Last Name
+        cout << "Case 4, sorting by Last Name" << endl;
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
             for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
                 if ((lastName[i2][0] - '0') > (lastName[i2+1][0] - '0') || ((lastName[i2][0] - '0') == (lastName[i2+1][0] - '0') && tiebreaker)) { 
-                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders Last Name in alphabetical order
-                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
-                        temp2[i2][i3] = lastName[i2][i3];
-                        lastName[i2][i3] = lastName[i2+1][i3];
-                        lastName[i2+1][i3] = temp2[i2][i3];
-                    }                    
-            
-                    char temp2[NUM_PATIENTS];  // Orders Sex according to Last Name
-                    temp2[i2] = sex[i2];
-                    sex[i2] = sex[i2+1];
-                    sex[i2+1] = temp2[i2];
-                    
-                    int temp = age[i2]; // Orders Age according to Last Name
-                    age[i2] = age[i2+1];
-                    age[i2+1] = temp;
-
-                    for (int i3 = 0; i3 < ID_LENGTH + 1; i3++) { // Orders ID according to Last Name
-                        char temp2[NUM_PATIENTS][ID_LENGTH+1];
-                        temp2[i2][i3] = id[i2][i3];
-                        id[i2][i3] = id[i2+1][i3];
-                        id[i2+1][i3] = temp2[i2][i3];
-                    }  
-                
-                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders First Name according to Last Name
-                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
-                        temp2[i2][i3] = firstName[i2][i3];
-                        firstName[i2][i3] = firstName[i2+1][i3];
-                        firstName[i2+1][i3] = temp2[i2][i3];
-                    }               
+                    sortFirstAndLast(lastName , NUM_PATIENTS, MAX_NAME_LENGTH, i2); // Orders Last Name through sort function           
+                    sortSex(sex, NUM_PATIENTS, i2);  // Orders Sex according to Last Name      
+                    intArraySort(age, NUM_PATIENTS, i2); // Orders Age according to Last Name
+                    sortID(id, NUM_PATIENTS, ID_LENGTH + 1, i2); // Orders ID according to Last Name
+                    sortFirstAndLast(firstName, NUM_PATIENTS, MAX_NAME_LENGTH, i2); // Orders First Name according to Last Name
                 }    
             }
         }
     }
 
-    if (strcmp(userInput , category[4])) { // Sorting for First Name
-        cout << "Case 5, sorting by First Name";
-
+    else if (strcmp(userInput , category[4]) == 0) { // Sorting for First Name
+        cout << "Case 5, sorting by First Name" << endl;
         for (int i = 0; i < NUM_PATIENTS - 1; i++) {
             for (int i2 = 0; i2 < NUM_PATIENTS - 1; i2++) {
                 if ((firstName[i2][0] - '0') > (firstName[i2+1][0] - '0')) { 
-                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders First Name in alphabetical order
-                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
-                        temp2[i2][i3] = firstName[i2][i3];
-                        firstName[i2][i3] = firstName[i2+1][i3];
-                        firstName[i2+1][i3] = temp2[i2][i3];
-                    }                   
-                    
-                    for (int i3 = 0; i3 < MAX_NAME_LENGTH; i3++) { // Orders Last Name according to First Name
-                        char temp2[NUM_PATIENTS][MAX_NAME_LENGTH];
-                        temp2[i2][i3] = lastName[i2][i3];
-                        lastName[i2][i3] = lastName[i2+1][i3];
-                        lastName[i2+1][i3] = temp2[i2][i3];
-                    }                    
-            
-                    char temp2[NUM_PATIENTS];  // Orders Sex according to First Name
-                    temp2[i2] = sex[i2];
-                    sex[i2] = sex[i2+1];
-                    sex[i2+1] = temp2[i2];
-                    
-                    int temp = age[i2]; // Orders Age according to First Name
-                    age[i2] = age[i2+1];
-                    age[i2+1] = temp;
-
-                    for (int i3 = 0; i3 < ID_LENGTH + 1; i3++) { // Orders ID according to First Name
-                        char temp2[NUM_PATIENTS][ID_LENGTH+1];
-                        temp2[i2][i3] = id[i2][i3];
-                        id[i2][i3] = id[i2+1][i3];
-                        id[i2+1][i3] = temp2[i2][i3];
-                    }                 
+                    sortFirstAndLast(firstName, NUM_PATIENTS, MAX_NAME_LENGTH, i2); // Orders First Name in alphabetical order                        
+                    sortFirstAndLast(lastName , NUM_PATIENTS, MAX_NAME_LENGTH, i2); // Orders Last Name according to First Name                          
+                    sortSex(sex, NUM_PATIENTS, i2);  // Orders Sex according to First Name           
+                    intArraySort(age, NUM_PATIENTS, i2); // Orders Age according to First Name
+                    sortID(id, NUM_PATIENTS, ID_LENGTH + 1, i2); // Orders ID according to First Name              
                 }    
             }
         }
