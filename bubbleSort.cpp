@@ -5,6 +5,7 @@
 using namespace std; 
 
 // Provided arrays and constants
+// Updated Code
 
 const int NUM_PATIENTS = 10; // 10 patients will be included, this value cannot be modified
 const int MAX_NAME_LENGTH = 10; // no names longer than 10 characters, this value cannot be modified
